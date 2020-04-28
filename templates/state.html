@@ -1,0 +1,144 @@
+<link rel="icon"
+      type="image/png"
+      href="{{url_for('.static', filename='images/favicon.png')}}">
+
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/main.css')}}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+<script src="{{url_for('.static', filename='js/main.js')}}"></script>
+{{super()}}
+{% endblock %}
+
+
+{% block title %}
+Where Are The Arts? - {{ the_state.StateName }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-lg-6 mx-md-auto mx-lg-auto">
+
+<!-- note, the variable the_sock was passed to the template
+     in the Flask route -->
+
+<h1 class="mt-5 display-3 text-primary">{{ the_state.StateName }}</h1>
+<ul>
+  <!-- data to start -->
+    <li class="lead">Student enrollment in K-12 public schools is around <span class="font-weight-bold">{{ the_state.StudentPopulation }}.</span> There are <span class="font-weight-bold">{{ the_state.RawSchoolNum }}</span> public schools in {{ the_state.StateName }}.
+
+    {% if the_state.PctSchoolsWithAccess %}
+    <li class="lead">
+    <span class="font-weight-bold">{{ the_state.PctSchoolsWithAccess }}%  </span> have at least one arts program.
+    </li>
+    {% endif %}
+
+    {% if the_state.PctWithStudentsWithAnyAccess %}
+    <li class="lead">
+    <span class="font-weight-bold">{{ the_state.PctWithStudentsWithAnyAccess }}%  </span> of students in the state have access to the arts in school.
+    </li>
+    {% endif %}
+
+    {% if the_state.SchoolsWithoutArts %}
+    <li class="lead"> There are <span class="font-weight-bold">
+    {{ the_state.SchoolsWithoutArts }} </span> schools without any arts offerings.
+    </li>
+    {% endif %}
+
+    {% if the_state.StudentsWithoutAccess %}
+    <li class="lead"> <span class="font-weight-bold">
+    {{ the_state.StudentsWithoutAccess }} </span> students don't have access to arts in school.
+    </li>
+    {% endif %}
+
+    {% if the_state.LocationsLeastAccess %}
+    <li class="lead"> Considering location, <span class="font-weight-bold">
+    {{ the_state.LocationsLeastAccess }} </span> schools offer arts programs the least.
+    </li>
+    {% endif %}
+
+  <!-- begin course offering data -->
+  {% if the_state.PctWithMusic %}
+  <li class="lead">
+    <span class="font-weight-bold">{{ the_state.PctWithMusic }}% </span> of schools have music programs.
+  </li>
+  {% endif %}
+  {% if the_state.PctWithVisArts %}
+  <li class="lead">
+    <span class="font-weight-bold">{{ the_state.PctWithVisArts }}% </span> of schools have visual arts programs.
+  </li>
+  {% endif %}
+  {% if the_state.PctWithTheatre %}
+  <li class="lead">
+    <span class="font-weight-bold">{{ the_state.PctWithTheatre }}%  </span> of schools have theatre programs.
+  </li>
+  {% endif %}
+  {% if the_state.PctWithDance %}
+  <li class="lead">
+    <span class="font-weight-bold">{{ the_state.PctWithDance }}%  </span> of schools have dance programs.
+  </li>
+  {% endif %}
+
+  <!-- begin enrollment data  -->
+      {% if the_state.PctAnyArtsEnrollment %}
+      <li class="lead">
+        <span class="font-weight-bold">{{ the_state.PctAnyArtsEnrollment }}%  </span> of public school students are enrolled in at least one arts class.
+      </li>
+      {% endif %}
+
+      {% if the_state.PctHighAnyArtsEnrollment %}
+      <li class="lead">
+        <span class="font-weight-bold">{{ the_state.PctHighAnyArtsEnrollment }}%  </span> of high schoolers are enrolled in at least one arts class.
+      </li>
+      {% endif %}
+
+      {% if the_state.PctElemAnyArtsEnrollment %}
+      <li class="lead">
+        <span class="font-weight-bold">{{ the_state.PctElemAnyArtsEnrollment }}%  </span> of elementary schoolers are enrolled in at least one arts class.
+      </li>
+      {% endif %}
+
+      {% if the_state.PctVisArtEnrollment %}
+      <li class="lead">
+        <span class="font-weight-bold">{{ the_state.PctVisArtEnrollment }}%  </span> of students are enrolled in a visual arts class.
+      </li>
+      {% endif %}
+
+      {% if the_state.PctMusicEnrollment %}
+      <li class="lead">
+        <span class="font-weight-bold">{{ the_state.PctMusicEnrollment }}%  </span> of students are enrolled in a music class.
+      </li>
+      {% endif %}
+
+      {% if the_state.PctTheatreEnrollment %}
+      <li class="lead">
+        <span class="font-weight-bold">{{ the_state.PctTheatreEnrollment }}%  </span> of students are enrolled in a theatre class.
+      </li>
+      {% endif %}
+    <!-- end enrollment data -->
+  <!-- information for every state -->
+			<li class="lead">{{ the_state.StateName }} <span class="font-weight-bold"> {{ the_state.ArtsDefinedCore }} </span> consider the arts a core or academic subject.</li>
+      <li class="lead">{{ the_state.StateName }} <span class="font-weight-bold"> {{ the_state.RequireStateDistrictTest }} </span> require mandated testing on student arts learning and achievement. </li>
+      <li class="lead">{{ the_state.StateName }} <span class="font-weight-bold"> {{ the_state.ArtsforSchoolAccred }} </span> require arts programs for school accreditation. </li>
+      <li class="lead"> {{ the_state.Source }} publish arts education data. View more information on arts education in {{ the_state.StateName }} <a href="{{ the_state.LinkSource }}"> <span class="font-weight-bold">here.</span>
+      </li>
+
+  <!-- end information for every state.-->
+		</ul>
+
+
+<p><a href="{{ url_for('index') }}">Return to search page.</a></p>
+
+</div>
+</div>
+</div>
+
+{% endblock %}

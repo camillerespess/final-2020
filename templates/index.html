@@ -1,0 +1,59 @@
+<link rel="icon"
+      type="image/png"
+      href="{{url_for('.static', filename='images/favicon.png')}}">
+
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/main.css')}}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+<script src="{{url_for('.static', filename='js/main.js')}}"></script>
+<script src="https://unpkg.com/intersection-observer"></script>
+<script src="https://unpkg.com/scrollama"></script>
+{{super()}}
+{% endblock %}
+
+{% block title %} Where Are the Arts? {% endblock %}
+{% block content %}
+
+<div class="container">
+
+  <div class="container2">
+<h1>where are the arts?</h1>
+</div>
+  <div class="container3">
+    <p>In some schools: the art studio, the theatre, the music room, all these spaces are a given. They are an assumed part of learning. But in others, these spaces might not exist or have been transformed into things like storage rooms after schools stripped themselves of any arts classes.</p>
+
+    <p>As budget cuts hit school districts across the country, arts programs are threatened or disbanded altogether. </p>
+
+    <p>In Arizona, it’s required for all public schools to offer arts classes. But in 25 percent of these same schools, there isn’t a single arts course. In other states, like Georgia, 96 percent of schools have at least one arts program. And in some states, this data isn't collected at all.</p>
+
+    <p> There are 51 million students in America's public schools. And art and music programs are out of reach for a large number of them. </p>
+
+    <p>So, where are the arts?</p>
+  </div>
+<div class="container4">
+  <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://camillerespess.github.io/final-2020/map.html" height="525" width="100%"></iframe>
+</div>
+
+	<div class="row">
+		<div class="col-md-8 col-lg-6 mx-md-auto mx-lg-auto">
+			<div class="bg-black text-white p-4">
+
+	<!-- add some goodies to the form - for help, see
+	     https://pythonhosted.org/Flask-Bootstrap/forms.html
+		 -->
+       {{ wtf.quick_form(form, action=url_for("art_detail"), method="post") }}
+
+	   </div>
+    </div>
+  </div>
+    <footer>This web app was created by Camille Respess in 2020. The GitHub repository can be found<a href="https://github.com/camillerespess/final-2020"> here.</a></footer>
+</div>
+{% endblock %}
